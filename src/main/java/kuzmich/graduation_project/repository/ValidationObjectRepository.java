@@ -1,4 +1,11 @@
 package kuzmich.graduation_project.repository;
 
-public interface ValidationObjectRepository {
+import kuzmich.graduation_project.model.ValidationObject;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.UUID;
+
+@Repository
+public interface ValidationObjectRepository extends JpaRepository<ValidationObject, UUID> {
 }

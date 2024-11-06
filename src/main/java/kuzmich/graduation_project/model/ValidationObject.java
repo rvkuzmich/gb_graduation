@@ -1,6 +1,6 @@
 package kuzmich.graduation_project.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -8,14 +8,29 @@ import java.util.UUID;
 
 @Data
 @Entity
+@Table(name = "validation_objects")
 public class ValidationObject {
 
-    UUID id;
-    String objectName;
-    String location;
-    Boolean validationStatus;
-    LocalDate validationStatusAssignedAt;
-    LocalDate validationStatusExpiresAt;
-    Employee employee;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
+    @Column(name = "objectName", nullable = false)
+    private String objectName;
+
+    @Column(name = "location", nullable = false)
+    private String location;
+
+    @Column(name = "timeToValidate", nullable = false)
+    private Integer hoursToValidate;
+
+    @Column(name = "validation_status", nullable = false)
+    private Boolean validationStatus;
+
+    @Column(name = "validation_status_assigned_at", nullable = true)
+    private LocalDate validationStatusAssignedAt;
+
+    @Column(name = "validation_status_expires_at", nullable = true)
+    private LocalDate validationStatusExpiresAt;
 
 }

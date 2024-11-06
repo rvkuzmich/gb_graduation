@@ -1,11 +1,11 @@
 package kuzmich.graduation_project.repository;
 
-import kuzmich.graduation_project.model.User;
+import kuzmich.graduation_project.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, UUID> {
+public interface RoleRepository extends JpaRepository<Role, UUID> {
 }
