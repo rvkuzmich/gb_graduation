@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "validation_objects")
+@Table(name = "validation_object")
 public class ValidationObject {
 
     @Id
@@ -24,13 +24,16 @@ public class ValidationObject {
     @Column(name = "timeToValidate", nullable = false)
     private Integer hoursToValidate;
 
-    @Column(name = "validation_status", nullable = false)
+    @Column(name = "validationStatus", nullable = false)
     private Boolean validationStatus;
 
-    @Column(name = "validation_status_assigned_at", nullable = true)
+    @Column(name = "validationStatusAssignedAt", nullable = true)
     private LocalDate validationStatusAssignedAt;
 
-    @Column(name = "validation_status_expires_at", nullable = true)
+    @Column(name = "validationStatusExpiresAt", nullable = true)
     private LocalDate validationStatusExpiresAt;
+
+//    @Column(name = "employeeId", nullable = true)
+//    private UUID employeeId;
 
 }

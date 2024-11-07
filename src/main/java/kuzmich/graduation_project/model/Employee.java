@@ -37,7 +37,10 @@ public class Employee {
     @MapsId
     private User user;
 
-    @ManyToMany()
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "employee_validation_object",
+            joinColumns = @JoinColumn(name = "employee_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "validation_object_id", referencedColumnName = "id"))
     private List<ValidationObject> objectsToValidate;
 
 }

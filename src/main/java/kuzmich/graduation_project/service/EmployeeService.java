@@ -20,7 +20,7 @@ public class EmployeeService {
     private final ValidationObjectRepository validationObjectRepository;
 
     public List<Employee> findAll() {
-        return List.copyOf(employeeRepository.findAll());
+            return List.copyOf(employeeRepository.findAll());
     }
 
     public Optional<Employee> findById(UUID id) {
@@ -35,7 +35,7 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
     }
 
-    public Employee setUser(UUID id, UUID userId) {
+    public void setUser(UUID id, UUID userId) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
         Optional<User> optionalUser = userRepository.findById(userId);
         if (optionalEmployee.isEmpty() || optionalUser.isEmpty()) {
@@ -44,20 +44,22 @@ public class EmployeeService {
         Employee employee = optionalEmployee.get();
         User user = optionalUser.get();
         employee.setUser(user);
-        return employeeRepository.save(employee);
+        user.setEmployee(employee);
+        userRepository.save(user);
+        employeeRepository.save(employee);
     }
 
-    public Employee setMaxWorkHours(UUID id, Integer maxWorkHours) {
+    public void setMaxWorkHours(UUID id, Integer maxWorkHours) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
         if (optionalEmployee.isEmpty()) {
             throw new NoSuchElementException("No such employee");
         }
         Employee employee = optionalEmployee.get();
         employee.setMaxWorkHours(maxWorkHours);
-        return employeeRepository.save(employee);
+        employeeRepository.save(employee);
     }
 
-    public Employee addObjectToValidate(UUID id, UUID validationObjectId) {
+    public void addObjectToValidate(UUID id, UUID validationObjectId) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
         Optional<ValidationObject> optionalValidationObject = validationObjectRepository.findById(validationObjectId);
         if (optionalEmployee.isEmpty() || optionalValidationObject.isEmpty()) {
@@ -66,13 +68,25 @@ public class EmployeeService {
         Employee employee = optionalEmployee.get();
         ValidationObject validationObject = optionalValidationObject.get();
         List<ValidationObject> objects = employee.getObjectsToValidate();
-        objects.add(validationObject);
-        employee.setObjectsToValidate(objects);
-        Integer currentWorkHours = employee.getCurrentWorkHours();
-        currentWorkHours += validationObject.getHoursToValidate();
-        employee.setCurrentWorkHours(currentWorkHours);
-        return employeeRepository.save(employee);
+        if (employee.getCurrentWorkHours() + validationObject.getHoursToValidate() < employee.getMaxWorkHours()) {
+            objects.add(validationObject);
+            employee.setObjectsToValidate(objects);
+            Integer currentWorkHours = employee.getCurrentWorkHours();
+            currentWorkHours += validationObject.getHoursToValidate();
+            employee.setCurrentWorkHours(currentWorkHours);
+//            validationObject.setEmployeeId(employee.getId());
+        } else {
+            throw new ArithmeticException("Employee's work hours are full");
+        }
+        validationObjectRepository.save(validationObject);
+        employeeRepository.save(employee);
     }
 
+    public List<ValidationObject> getValidationObjects(UUID id) {
+        if (employeeRepository.findById(id).isEmpty()) {
+            throw new NoSuchElementException("Employee with id " + id + " doesn't exists");
+        }
+        return List.copyOf(validationObjectRepository.findByEmployeeId(id));
+    }
 
 }
