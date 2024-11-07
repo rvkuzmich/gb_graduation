@@ -46,14 +46,14 @@ public class EmployeeController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{id}/validation-objects")
-    public ResponseEntity<List<ValidationObject>> getEmployeeValidationObjects(@PathVariable("id") UUID id) {
-        try {
-            return ResponseEntity.ok(employeeService.getValidationObjects(id));
-        } catch (NoSuchElementException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
+//    @GetMapping("/{id}/validation-objects")
+//    public ResponseEntity<List<ValidationObject>> getEmployeeValidationObjects(@PathVariable("id") UUID id) {
+//        try {
+//            return ResponseEntity.ok(employeeService.getValidationObjects(id));
+//        } catch (NoSuchElementException e) {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
     @PutMapping("/{id}/validation-objects")
     public ResponseEntity<Void> setValidationObject(@PathVariable("id") UUID id,

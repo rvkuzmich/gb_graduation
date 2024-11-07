@@ -9,24 +9,26 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    UUID id;
-    @Column(name = "user_name", nullable = false)
-    String userName;
-    @Column(name = "password", nullable = false)
-    String password;
+    private UUID id;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
-    Employee employee;
+    @Column(name = "user_name", nullable = false)
+    private String userName;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Column(name = "employeeId", nullable = true)
+    private UUID employeeId;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_role",
+    @JoinTable(name = "users_role",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    Set<Role> roles = new HashSet<>();
+    private Set<Role> roles;
 
 }

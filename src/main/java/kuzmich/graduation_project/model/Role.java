@@ -16,7 +16,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "role_name", nullable = false)
+    @Column(name = "roleName", nullable = false)
     private String roleName;
 
     public Role(String roleName) {

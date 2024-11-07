@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @SpringBootApplication
@@ -23,9 +24,10 @@ public class GraduationProjectApplication {
 		User admin = new User();
 		admin.setUserName("admin");
 		admin.setPassword("$2a$12$ShivOAYWDNuUqL3ax6HzE.w8DOUBzMp2hrNF39oJge6h/TYq0ijKq");
-		Set<Role> adminRoles = admin.getRoles();
+		Set<Role> adminRoles = new HashSet<>();
 		adminRoles.add(adminRole);
 		admin.setRoles(adminRoles);
+		userRepository.save(admin);
 	}
 
 }

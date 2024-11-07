@@ -13,10 +13,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfiguration {
 
-    @Bean
-    GrantedAuthorityDefaults grantedAuthorityDefaults() {
-        return new GrantedAuthorityDefaults("MY_ROLE_PREFIX_");
-    }
+//    @Bean
+//    GrantedAuthorityDefaults grantedAuthorityDefaults() {
+//        return new GrantedAuthorityDefaults("MY_ROLE_PREFIX_");
+//    }
 
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity

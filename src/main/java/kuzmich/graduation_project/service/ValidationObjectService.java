@@ -24,7 +24,7 @@ public class ValidationObjectService {
     private final EmployeeRepository employeeRepository;
 
     public List<ValidationObject> findAll(String userName) {
-        Optional<User> optionalUser = userRepository.findByLogin(userName);
+        Optional<User> optionalUser = userRepository.findByUserName(userName);
         User user = new User();
         if (optionalUser.isPresent()) {
             user = optionalUser.get();

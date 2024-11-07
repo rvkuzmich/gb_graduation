@@ -11,7 +11,7 @@ import java.util.UUID;
 @Repository
 public interface ValidationObjectRepository extends JpaRepository<ValidationObject, UUID> {
 
-    @Query("select v from validation_object v where v.employeeId = :employeeId order by v.validationStatusExpiresAt asc")
-    List<ValidationObject> findByEmployeeId(UUID employeeId);
+//    @Query("select v from validation_object v where v.employeeId = :employeeId order by v.validationStatusExpiresAt asc")
+//    List<ValidationObject> findByEmployeeId(UUID employeeId);
 
 }

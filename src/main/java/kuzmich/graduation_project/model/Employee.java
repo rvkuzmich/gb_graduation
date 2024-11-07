@@ -33,9 +33,8 @@ public class Employee {
     @Column(name = "current_work_hours", nullable = true)
     private Integer currentWorkHours;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
-    private User user;
+    @Column(name = "userId", nullable = true)
+    private UUID userId;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "employee_validation_object",

@@ -43,8 +43,8 @@ public class EmployeeService {
         }
         Employee employee = optionalEmployee.get();
         User user = optionalUser.get();
-        employee.setUser(user);
-        user.setEmployee(employee);
+        employee.setUserId(user.getId());
+        user.setEmployeeId(employee.getId());
         userRepository.save(user);
         employeeRepository.save(employee);
     }
@@ -82,11 +82,11 @@ public class EmployeeService {
         employeeRepository.save(employee);
     }
 
-    public List<ValidationObject> getValidationObjects(UUID id) {
-        if (employeeRepository.findById(id).isEmpty()) {
-            throw new NoSuchElementException("Employee with id " + id + " doesn't exists");
-        }
-        return List.copyOf(validationObjectRepository.findByEmployeeId(id));
-    }
+//    public List<ValidationObject> getValidationObjects(UUID id) {
+//        if (employeeRepository.findById(id).isEmpty()) {
+//            throw new NoSuchElementException("Employee with id " + id + " doesn't exists");
+//        }
+//        return List.copyOf(validationObjectRepository.findByEmployeeId(id));
+//    }
 
 }
