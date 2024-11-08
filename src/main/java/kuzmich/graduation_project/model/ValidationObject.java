@@ -33,7 +33,7 @@ public class ValidationObject {
     @Column(name = "validationStatusExpiresAt", nullable = true)
     private LocalDate validationStatusExpiresAt;
 
-//    @Column(name = "employeeId", nullable = true)
-//    private UUID employeeId;
+    @Column(name = "employeeId", nullable = true)
+    private UUID employeeId;
 
 }

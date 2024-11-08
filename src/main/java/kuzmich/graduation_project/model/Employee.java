@@ -36,7 +36,7 @@ public class Employee {
     @Column(name = "userId", nullable = true)
     private UUID userId;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "employee_validation_object",
             joinColumns = @JoinColumn(name = "employee_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "validation_object_id", referencedColumnName = "id"))

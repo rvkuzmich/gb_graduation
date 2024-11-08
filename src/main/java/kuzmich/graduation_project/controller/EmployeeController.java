@@ -3,12 +3,9 @@ package kuzmich.graduation_project.controller;
 import kuzmich.graduation_project.model.Employee;
 import kuzmich.graduation_project.model.ValidationObject;
 import kuzmich.graduation_project.service.EmployeeService;
-import kuzmich.graduation_project.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,14 +43,14 @@ public class EmployeeController {
         return ResponseEntity.noContent().build();
     }
 
-//    @GetMapping("/{id}/validation-objects")
-//    public ResponseEntity<List<ValidationObject>> getEmployeeValidationObjects(@PathVariable("id") UUID id) {
-//        try {
-//            return ResponseEntity.ok(employeeService.getValidationObjects(id));
-//        } catch (NoSuchElementException e) {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
+    @GetMapping("/{id}/validation-objects")
+    public ResponseEntity<List<ValidationObject>> getEmployeeValidationObjects(@PathVariable("id") UUID id) {
+        try {
+            return ResponseEntity.ok(employeeService.getValidationObjects(id));
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @PutMapping("/{id}/validation-objects")
     public ResponseEntity<Void> setValidationObject(@PathVariable("id") UUID id,
