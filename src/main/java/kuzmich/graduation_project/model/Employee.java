@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "employee")
+@Table(name = "employees")
 public class Employee {
 
     @Id
@@ -20,9 +20,6 @@ public class Employee {
 
     @Column(name = "last_name", nullable = false)
     private String lastName;
-
-    @Column(name = "uid", nullable = false)
-    private Long UID;
 
     @Column(name = "location", nullable = false)
     private String location;

@@ -7,10 +7,8 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "role")
+@Table(name = "roles")
 public class Role {
-
-    // ADMIN, SUPERVISOR, ENGINEER
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

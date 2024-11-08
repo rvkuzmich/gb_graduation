@@ -82,6 +82,20 @@ public class EmployeeService {
         employeeRepository.save(employee);
     }
 
+    public void releaseObject(UUID id, UUID validationObjectId) {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
+        Optional<ValidationObject> optionalValidationObject = validationObjectRepository.findById(validationObjectId);
+        if (optionalEmployee.isEmpty() || optionalValidationObject.isEmpty()) {
+            throw new NoSuchElementException("No such employee or validation object");
+        }
+        Employee employee = optionalEmployee.get();
+        ValidationObject object = optionalValidationObject.get();
+        List<ValidationObject> objects = employee.getObjectsToValidate();
+        objects.remove(object);
+        employee.setObjectsToValidate(objects);
+        employeeRepository.save(employee);g
+    }
+
     public List<ValidationObject> getValidationObjects(UUID id) {
         if (employeeRepository.findById(id).isEmpty()) {
             throw new NoSuchElementException("Employee with id " + id + " doesn't exists");

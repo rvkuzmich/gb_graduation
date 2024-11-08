@@ -37,8 +37,8 @@ public class UserController {
 
     @PutMapping("/{id}/role")
     public ResponseEntity<Void> addRole(@PathVariable("id") UUID id,
-                                        @RequestParam UUID roleId) {
-        userService.addRole(id, roleId);
+                                        @RequestParam String roleName) {
+        userService.addRole(id, roleName);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 

@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "validation_object")
+@Table(name = "validation_objects")
 public class ValidationObject {
 
     @Id

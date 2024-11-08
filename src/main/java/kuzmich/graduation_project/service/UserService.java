@@ -1,9 +1,10 @@
 package kuzmich.graduation_project.service;
 
-import kuzmich.graduation_project.model.Role;
+import kuzmich.graduation_project.controller.UserRole;
 import kuzmich.graduation_project.model.User;
 import kuzmich.graduation_project.repository.RoleRepository;
 import kuzmich.graduation_project.repository.UserRepository;
+import kuzmich.graduation_project.repository.UserRoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserRoleRepository userRoleRepository;
 
     public List<User> findAll() {
         return userRepository.findAll();
@@ -35,18 +37,18 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User addRole(UUID id, UUID roleId) {
+    public void addRole(UUID id, String roleName) {
         Optional<User> optionalUser = userRepository.findById(id);
-        Optional<Role> optionalRole = roleRepository.findById(roleId);
-        if (optionalUser.isEmpty() || optionalRole.isEmpty()) {
-            throw new NoSuchElementException("No such user or role");
+
+        if (optionalUser.isEmpty()) {
+            throw new NoSuchElementException("No such user");
         }
         User user = optionalUser.get();
-        Role role = optionalRole.get();
-        Set<Role> roleList = user.getRoles();
-        roleList.add(role);
-        user.setRoles(roleList);
-        return userRepository.save(user);
+
+        UserRole roleToAdd = new UserRole();
+        roleToAdd.setUserId(user.getId());
+        roleToAdd.setRoleName(roleName);
+        userRoleRepository.save(roleToAdd);
     }
 
 }

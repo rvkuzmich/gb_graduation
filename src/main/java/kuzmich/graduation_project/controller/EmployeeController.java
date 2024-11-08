@@ -52,10 +52,17 @@ public class EmployeeController {
         }
     }
 
-    @PutMapping("/{id}/validation-objects")
+    @PutMapping("/{id}/validation-objects/set")
     public ResponseEntity<Void> setValidationObject(@PathVariable("id") UUID id,
                                                     @RequestParam UUID validationObjectId) {
         employeeService.addObjectToValidate(id, validationObjectId);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+    @PutMapping("/{id}/validation-objects/release")
+    public ResponseEntity<Void> releaseValidationObject(@PathVariable("id") UUID id,
+                                                        @RequestParam UUID validationObjectId) {
+        employeeService.releaseObject(id, validationObjectId);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
