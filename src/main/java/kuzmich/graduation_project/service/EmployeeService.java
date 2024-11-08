@@ -93,10 +93,10 @@ public class EmployeeService {
         List<ValidationObject> objects = employee.getObjectsToValidate();
         objects.remove(object);
         employee.setObjectsToValidate(objects);
-        employeeRepository.save(employee);g
+        employeeRepository.save(employee);
     }
 
-    public List<ValidationObject> getValidationObjects(UUID id) {
+    public List<ValidationObject> findValidationObjects(UUID id) {
         if (employeeRepository.findById(id).isEmpty()) {
             throw new NoSuchElementException("Employee with id " + id + " doesn't exists");
         }

@@ -44,9 +44,9 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}/validation-objects")
-    public ResponseEntity<List<ValidationObject>> getEmployeeValidationObjects(@PathVariable("id") UUID id) {
+    public ResponseEntity<List<ValidationObject>> findEmployeeValidationObjects(@PathVariable("id") UUID id) {
         try {
-            return ResponseEntity.ok(employeeService.getValidationObjects(id));
+            return ResponseEntity.ok(employeeService.findValidationObjects(id));
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         }

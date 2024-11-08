@@ -23,7 +23,11 @@ public class ValidationObjectService {
     private final UserRepository userRepository;
     private final EmployeeRepository employeeRepository;
 
-    public List<ValidationObject> findAll(String userName) {
+    public List<ValidationObject> findAll() {
+        return List.copyOf(validationObjectRepository.findAll());
+    }
+
+    public List<ValidationObject> findAllForEmployee(String userName) {
         Optional<User> optionalUser = userRepository.findByUserName(userName);
         User user = new User();
         if (optionalUser.isPresent()) {

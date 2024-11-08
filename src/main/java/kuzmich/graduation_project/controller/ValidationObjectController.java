@@ -5,8 +5,6 @@ import kuzmich.graduation_project.service.ValidationObjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -21,10 +19,8 @@ public class ValidationObjectController {
     private final ValidationObjectService validationObjectService;
 
     @GetMapping
-    public ResponseEntity<List<ValidationObject>> findAll(@CurrentSecurityContext(expression = "authentication")
-                                                              Authentication authentication) {
-        String userName = authentication.getName();
-        return ResponseEntity.ok(validationObjectService.findAll(userName));
+    public ResponseEntity<List<ValidationObject>> findAll() {
+        return ResponseEntity.ok(validationObjectService.findAll());
     }
 
     @GetMapping("/{id}")
